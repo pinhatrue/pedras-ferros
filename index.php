@@ -98,7 +98,7 @@
               mysqli_close($conn); // fechando a conexao com o BD
 
             } else {
-              echo ("Houve um erro ao conectar com o banco de dados");
+              echo ("Não foram encontrados nenhum resultado");
             }
         ?>
       </div>

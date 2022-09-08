@@ -6,11 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Formulário PHP com anexo</title>
  
- <!-- Layout -->
- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
- 
- <!-- JavaScript -->
- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <!-- Layout -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+     
+    <!-- JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
+    <?php
+      //require_once("header.php");
+    ?>
+
   </head>
  
   <body>
@@ -27,23 +32,23 @@
  <div class="form-group">
    <label class="col-md-4 control-label" for="nome">Nome</label>  
  <div class="col-md-4">
-   <input id="nome" name="nome" placeholder="Informe seu nome" class="form-control input-md" required="" type="text">
+   <input id="nome" name="nome" placeholder="Informe o nome do produto" class="form-control input-md" required="" type="text">
  </div>
  </div>
  
- <!-- Campo: Email -->
+ <!-- Campo: Preço -->
  <div class="form-group">
-   <label class="col-md-4 control-label" for="nome">Email</label>  
+   <label class="col-md-4 control-label" for="nome">Preço</label>  
  <div class="col-md-4">
-   <input id="replyto" name="replyto" placeholder="Informe seu email" class="form-control input-md" required="" type="text">
+   <input id="preco" name="preco" placeholder="Informe o preço do produto R$" class="form-control input-md" required="" type="text">
  </div>
  </div>
  
- <!-- Campo: Assunto -->
+ <!-- Campo: Descrição -->
  <div class="form-group">
-   <label class="col-md-4 control-label" for="nome">Assunto</label>  
+   <label class="col-md-4 control-label" for="nome">Descrição</label>  
  <div class="col-md-4">
-   <input id="assunto" name="assunto" placeholder="Informe o assunto da mensagem" class="form-control input-md" required="" type="text">
+   <input id="descricao" name="descricao" placeholder="Informe a descrição do produto" class="form-control input-md" required="" type="text">
  </div>
  </div>
  
@@ -56,11 +61,11 @@
  </div>
  </div> 
  
- <!-- Campo: Mensagem -->
+ <!-- Campo: Link da Mensagem -->
  <div class="form-group">
-   <label class="col-md-4 control-label" for="mensagem">Mensagem</label>
+   <label class="col-md-4 control-label" for="mensagem">Link da Imagem</label>
  <div class="col-md-4">                     
-   <textarea class="form-control" id="mensagem" name="mensagem"></textarea>
+   <textarea class="form-control" id="link_imagem" name="link_imagem"></textarea>
  </div>
  </div>
  

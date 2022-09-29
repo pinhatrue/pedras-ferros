@@ -8,52 +8,36 @@
     <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
-    <header>
-      <div class="content">
-        <nav>
-          <p class="brand">André Flesch <strong>Pedras</strong></p>
-          <ul>
-            <li><a href="#catalog">Catálogo</a></li>
-            <li><a href="#about">Sobre</a></li>
-            <li><a href="#features">Contato</a></li>
-            <button>Login</button>
-          </ul>
-        </nav>
-        <div class="header-block">
-          <div class="text">
-            <h2>André Flesch Pedras</h2>
-            <p>
-              paragrafo paragrafo 
-            </p>
-          </div>
-          <img src="images/logo.jpeg" alt="André Flesch Pedras" />
-        </div>
-      </div>
-    </header>
+
+  	<div>
+  		<?php
+  		require_once("nav.php");
+  		require_once("conecta.php");
+    	?>
+    </div>
+
     <section class='catalog' id='catalog'>
       <div class='content'>
         <div class='title-wrapper-catalog'>
-          <p>Encontre o que você precisa</p>
+          <p>Encontre o que você precisa:</p>
           <h3>Catálogo</h3>
         </div>
-        <div class='filter-card'>
+        
+        <!-- <div class='filter-card'>
           <input
           type='text'
           class='search-input'
           placeholder='Faça sua busca'
           />
           <button class='search-button'>Busca</button>
-        </div>
+        </div> -->
 
             <?php
-            $conn = mysqli_connect("127.0.0.1", "root", "", "pedras"); // abre a conexão com o banco de dados
-            if ($conn == false){
-              die("Houve um erro ao conectar com o banco de dados");
-            }
 
 
             //$sql = "SELECT * FROM contatos ORDER BY nome ASC";
-            $sql = "SELECT * FROM PRODUTOS, IMAGENS WHERE produtos.id = imagens.id_produto"; // consulta ligando as duas tabelas para exibir o nome do grupo
+            $sql = "SELECT * FROM PRODUTOS"; // consulta ligando as duas tabelas para exibir o nome do grupo
+            // , IMAGENS WHERE produtos.id = imagens.id_produto
 
             $registros = mysqli_query($conn, $sql);
 
@@ -75,14 +59,14 @@
                 //echo ("<a scr='$registro[imagem]'");
                 echo ("  
                     <div class='card-item'>
-                      <img src='$registro[imagem]' alt='Car' />
+                      <img src='$registro[imagem]' alt='Imagem' />
                       <div class='card-content'>
                         <h3>$registro[nome]</h3>
                         <p>
                           $registro[descricao]
                         </p>
-                        <button type='button'>Comprar</button>
                       </div>
+                      <button type='button'>Adicionar ao Carrinho</button>
                     </div>
                 ");
               }
@@ -127,14 +111,6 @@
           <h3>Fechar Pedido</h3>
         </div>
         <div class="feature-card-block">
-          <div class="feature-card-item">
-            <img src="images/whatsapp.png" alt="Feature" />
-            <div class="feature-text-content">
-              <h3>Whatsapp</h3>
-              <p>Para orçamento estamos disponíveis através do WhatsApp no Link abaixo</p>
-              <p>Atendemos todo Brasil diretamente pela fábrica ou através de parceiros.</p>
-            </div>
-          </div>
           <div class="feature-card-item">
             <img src="images/whatsapp.png" alt="Feature" />
             <div class="feature-text-content">

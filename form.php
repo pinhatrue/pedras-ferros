@@ -12,21 +12,26 @@
     <!-- JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
-    <?php
-      //require_once("header.php");
-    ?>
 
   </head>
+  
+    <div>
+    <?php
+      require_once("nav.php");
+      require_once("conecta.php");
+    ?>
+    </div>
+
  
   <body>
  <div class="container">
  <br>
    
- <form class="form-horizontal" method="POST" action="envia.php" enctype="multipart/form-data">
+ <form class="form-horizontal" method="POST">
    <fieldset>
  
  <!-- Título do formulário -->
- <legend>Formulário PHP com envio de anexo</legend>
+ <legend>Envio de Produto:</legend>
  
  <!-- Campo: Nome -->
  <div class="form-group">
@@ -50,9 +55,18 @@
  <div class="col-md-4">
    <input id="descricao" name="descricao" placeholder="Informe a descrição do produto" class="form-control input-md" required="" type="text">
  </div>
+ </div> 
+
+ <!-- Campo: Estoque -->
+ <div class="form-group">
+   <label class="col-md-4 control-label" for="nome">Estoque</label>  
+ <div class="col-md-4">
+   <input id="estoque" name="estoque" placeholder="Informe o estoque do produto" class="form-control input-md" required="" type="text">
+ </div>
  </div>
  
- <!-- Campo: anexo --> 
+ <!-- Campo: anexo -->
+<!--  
  <div class="form-group">
    <label class="col-md-4 control-label" for="arquivo">Anexo</label>
  <div class="col-md-4">
@@ -60,7 +74,7 @@
      <span class="help-block">2MB por mensagem</span>
  </div>
  </div> 
- 
+-->
  <!-- Campo: Link da Mensagem -->
  <div class="form-group">
    <label class="col-md-4 control-label" for="mensagem">Link da Imagem</label>
@@ -74,7 +88,7 @@
  <div class="form-group">
    <label class="col-md-4 control-label" for="submit"></label>
  <div class="col-md-4">
-   <button type="submit" class="btn btn-inverse">Enviar</button>
+   <button type="submit" name="enviar" class="btn btn-inverse">Enviar</button>
  </div>
  </div>
  
@@ -83,4 +97,61 @@
  
  </div>
   </body>
+  <?php
+
+require_once("conecta.php");
+
+/* Valores recebidos do formulário  */
+//$arquivo = $_FILES['arquivo'];
+
+
+// isset testa se uma variavel existe
+if (isset($_POST["enviar"]) == true) {
+ // codigo a ser executado se a variavel estiver definida
+
+ // usando a funcao empty para saber se um campo foi preenchido
+ if (empty($_POST["nome"]) == true) {
+   echo ("Por favor preencha o campo <b>nome</b>");
+ } else if (empty($_POST["preco"])){
+   // exibindo a mesagem de erro com javascript
+   //echo("<script>alert('Preencha a data de nascimento');</script>");
+   echo("Preencha o <b>preco</b>");
+ } else if (empty($_POST["descricao"])) {
+   echo("Preencha a <b>descricao</b>");
+ } else if(empty($_POST["link_imagem"])){
+   echo("Preencha o <b>link_imagem</b>");
+ } else {    
+   $nome = $_POST["nome"];
+   $preco = $_POST["preco"];
+   $descricao = $_POST["descricao"];
+   $estoque = $_POST["estoque"];
+   $link_imagem = $_POST["link_imagem"];
+
+   // INSERT INTO produtos (nome, preco, descricao, estoque) VALUES ('teste', '40', 'description', '40'); 
+   $sql = "INSERT INTO produtos (nome, preco, descricao, estoque, imagem) VALUES ('$nome', '$preco', '$descricao', '$estoque', '$link_imagem')";
+
+
+  // INSERT INTO produtos (nome, preco, descricao, estoque) VALUES ('teste', '50', 'teste', '50');
+// INSERT INTO imagens (id_produto, imagem) VALUES ((SELECT LAST_INSERT_ID()),'https://lh3.googleusercontent.com/p/AF1QipO74PEJkE4XiWni5xKHmzz6ub_hTwptFDbcG0Ec=s1280-p-no-v1');
+   
+   // echo para debugar a consulta sql gerada
+    echo ($sql);
+
+   // mandando executar a consulta sql
+   // a funcao mysqli_query retorna true se a consulta foi executada com sucesso
+   if (mysqli_query($conn, $sql)){
+     echo ("Produto adicionado com sucesso!<br>");
+   } else {
+     // erro ao executar a consulta
+     echo ("Erro: $sql <br>" . mysqli_error($conn) );
+   }
+
+   // encerrando a conexao
+   mysqli_close($conn);
+   
+ }
+}
+
+?>
+
 </html>

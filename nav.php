@@ -10,7 +10,7 @@
 <body>
   <header>
     <nav>
-      <a class="logo" href="inicio.php">Flesch Pedras</a>
+      <a class="logo" href="/">Flesch Pedras</a>
       <div class="mobile-menu">
         <div class="line1"></div>
         <div class="line2"></div>
@@ -19,6 +19,7 @@
       <ul class="nav-list">
         <li><a href="form.php">Upload</a></li>
         <li><a href="login.php">Login</a></li>
+        <li><a href="sair.php">Sair</a></li>
       </ul>
     </nav>
   </header>

@@ -2,7 +2,7 @@
 	session_start();
 
 	if (isset($_SESSION["usuario"])){
-		header("location: index.php");
+		header("location: inicio.php");
 	}
 ?>
 <!DOCTYPE html>
@@ -102,7 +102,7 @@
 			<div class="card-content">
 				<div class="card-content-area">
 					<label for="usuario">Usuário</label>
-					<input type="text" id="usuario" name="usuario" autocomplete="off">
+					<input type="text" name="usuario" autocomplete="off">
 				</div>
 				<div class="card-content-area">
 					<label for="password">Senha</label>
@@ -110,7 +110,7 @@
 				</div>
 				<div class="card-footer">
 					<input type="submit" value="Login" class="submit" name="enviar">
-					<a href="#" class="recuperar_senha">Esqueci minha senha</a>
+					<a href="#" class="recuperar_senha">Esqueci a minha senha</a>
 				</div>
 			</div>
 		</form>
@@ -125,18 +125,13 @@
 
 				require_once("conecta.php");
 
-				$sql = "SELECT * FROM `usuarios` WHERE login='$usuario' AND senha='$senha' ";
+				$sql = "SELECT * FROM usuarios WHERE (login='$usuario' OR email='$usuario') AND senha='$senha' ";
 
 				$resultado = mysqli_query($conn, $sql);
 
 				if (mysqli_num_rows($resultado) == 1) {
-					$registro = mysqli_fetch_array($resultado);
-					echo "<tr><td>$registro[login]</td><td>$registro[senha]</td><td>$registro[nivel_acesso]</td></tr>";
 					$_SESSION["usuario"] = $usuario;
-					/*if $registro[nivel] = 1 {
-						echo "ADM";
-					} */
-					header("location: index.php");
+					header("location: inicio.php");
 
 				} else {
 					echo ("Usuário ou senha incorreto");

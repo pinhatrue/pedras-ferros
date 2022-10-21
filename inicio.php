@@ -5,13 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Flesch Pedras</title>
-    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/estilo.css" />
   </head>
   <body>
 
   	<div>
   		<?php
-  		require_once("nav.php");
+      require_once("nav.php");
   		require_once("conecta.php");
     	?>
     </div>
@@ -65,8 +65,8 @@
                         <p>
                           $registro[descricao]
                         </p>
-                      </div>
-                      <button type='button'>Adicionar ao Carrinho</button>
+                      </div> 
+                      <button><a href='editar_produto.php?id_produto=$registro[id]'>Editar</a></button>
                     </div>
                 ");
               }
@@ -103,7 +103,6 @@
         </div>
       </div>
     </section>
-
     <section class="features" id="features">
       <div class="content">
         <div class="title-wrapper-features">
@@ -120,7 +119,6 @@
             </div>
           </div>
     </section>
-
     <footer>
       <div class="main">
         <div class="content footer-links">

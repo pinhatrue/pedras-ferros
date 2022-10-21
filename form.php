@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Formulário PHP com anexo</title>
+    <link rel="stylesheet" href="css/estilo.css" />
  
     <!-- Layout -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
@@ -17,8 +18,17 @@
   
     <div>
     <?php
+
+      require_once("protege.php");
       require_once("nav.php");
       require_once("conecta.php");
+
+      // verificação de nivel de acesso do usuario
+      $nivel = $_SESSION["nivel"];
+      if ($nivel == 1){
+        header("location: nivel.php");
+      }
+
     ?>
     </div>
 
@@ -153,5 +163,4 @@ if (isset($_POST["enviar"]) == true) {
 }
 
 ?>
-
 </html>

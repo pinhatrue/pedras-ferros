@@ -297,14 +297,14 @@ section .card-item {
   width: 65%;
   height: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: flex-start;
-  padding-top: 10%;
+  padding-top: 5%;
 }
 
-.right h3 {
+.right  {
   text-align: right;
-  width: 90%;
+  width: 50%;
   margin-bottom: 20px;
 }
 
@@ -367,15 +367,11 @@ section .card-item {
 }
 
 /* Footer */
-footer {
-  width: 100%;
-  height: 250px;
-}
 
-footer .main {
+footer  {
   width: 100%;
   height: 200px;
-  background: var(--orange);
+  background-color: black;
   padding: 20px 10px;
 }
 

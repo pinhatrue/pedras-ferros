@@ -1,10 +1,3 @@
-<?php
-	session_start();
-
-	if (isset($_SESSION["usuario"])){
-		header("location: index.php");
-	}
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,9 +31,9 @@
 		    color: black;
 		}
 
-		.card-header::after {
+		.card-header {
 		    content: "";
-		    width: 70px;
+		    width: 0px;
 		    height: 1px;
 		    background-color: black;
 		    display: black;
@@ -102,7 +95,7 @@
 			<div class="card-content">
 				<div class="card-content-area">
 					<label for="usuario">Usuário</label>
-					<input type="text" id="usuario" name="usuario" autocomplete="off">
+					<input type="text" name="usuario" autocomplete="off">
 				</div>
 				<div class="card-content-area">
 					<label for="password">Senha</label>
@@ -110,12 +103,21 @@
 				</div>
 				<div class="card-footer">
 					<input type="submit" value="Login" class="submit" name="enviar">
-					<a href="#" class="recuperar_senha">Esqueci minha senha</a>
+					<a href="#" class="recuperar_senha">Esqueci a minha senha</a>
 				</div>
+
+				<div class="card-footer">
+					<input type="submit" value="Cadastrar" class="submit" name="enviar">
+					<a href="#" class="Cadastrar">Cadastra-se agora</a>
+				</div>
+
 			</div>
 		</form>
 	</div>
+                
 	<?php
+
+		session_start();
 		if (isset($_POST["enviar"])) {
 			$usuario = $_POST["usuario"];
 			$senha = $_POST["senha"];
@@ -125,18 +127,17 @@
 
 				require_once("conecta.php");
 
-				$sql = "SELECT * FROM `usuarios` WHERE login='$usuario' AND senha='$senha' ";
+				$sql = "SELECT * FROM `usuarios` WHERE (login='$usuario' OR email='$usuario') AND senha='$senha' ";
 
 				$resultado = mysqli_query($conn, $sql);
 
 				if (mysqli_num_rows($resultado) == 1) {
-					$registro = mysqli_fetch_array($resultado);
-					echo "<tr><td>$registro[login]</td><td>$registro[senha]</td><td>$registro[nivel_acesso]</td></tr>";
-					$_SESSION["usuario"] = $usuario;
-					/*if $registro[nivel] = 1 {
-						echo "ADM";
-					} */
-					header("location: index.php");
+					$usuario = mysqli_fetch_array($resultado);
+
+					$_SESSION["usuario"] = $usuario["login"];
+					$_SESSION["nivel"] = $usuario["nivel"];
+					//echo "Nivel de Acesso: $_SESSION['nivel']";
+					header("location: inicio.php");
 
 				} else {
 					echo ("Usuário ou senha incorreto");

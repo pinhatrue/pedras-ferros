@@ -21,6 +21,29 @@ SET time_zone = "+00:00";
 -- Banco de dados: `pedras`
 --
 
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `imagens`
+--
+
+CREATE TABLE `imagens` (
+  `id` int(11) NOT NULL,
+  `id_produto` int(11) DEFAULT NULL,
+  `imagem` varchar(1000) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `imagens`
+--
+
+INSERT INTO `imagens` (`id`, `id_produto`, `imagem`) VALUES
+(1, 1, 'https://lh3.googleusercontent.com/p/AF1QipNtqOCTTAjXzZF15KIzirS8G2g_qUZisWI9W879=s1280-p-no-v1'),
+(2, 3, 'https://lh3.googleusercontent.com/p/AF1QipNtqOCTTAjXzZF15KIzirS8G2g_qUZisWI9W879=s1280-p-no-v1'),
+(3, 4, 'https://lh3.googleusercontent.com/p/AF1QipNtqOCTTAjXzZF15KIzirS8G2g_qUZisWI9W879=s1280-p-no-v1');
+
+-- --------------------------------------------------------
+
 --
 -- Estrutura da tabela `pedidos`
 --

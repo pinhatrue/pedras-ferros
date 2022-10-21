@@ -15,14 +15,10 @@
 		</figure>
 
 		<form>
-  <fieldset>
-    <legend>Detalhes produtos</legend>
+  <fieldset disabled>
+    <legend>Disabled fieldset example</legend>
     <div class="mb-3">
-      <label for="disabledTextInput" class="form-label">Nome</label>
-      <input type="text" id="disabledTextInput" class="form-control" placeholder="Disabled input">
-    </div>
-    <div class="mb-3">
-      <label for="disabledTextInput" class="form-label">Descrição</label>
+      <label for="disabledTextInput" class="form-label">Disabled input</label>
       <input type="text" id="disabledTextInput" class="form-control" placeholder="Disabled input">
     </div>
     <div class="mb-3">

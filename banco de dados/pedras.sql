@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 01-Out-2022 às 16:58
+-- Tempo de geração: 26-Out-2022 às 11:15
 -- Versão do servidor: 10.4.24-MariaDB
--- versão do PHP: 8.1.6
+-- versão do PHP: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -102,15 +102,18 @@ CREATE TABLE `produtos_has_vendas` (
 CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL,
   `login` varchar(45) NOT NULL,
-  `senha` varchar(45) NOT NULL
+  `senha` varchar(45) NOT NULL,
+  `email` text NOT NULL,
+  `nivel` int(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `login`, `senha`) VALUES
-(1, 'admin', 'admin');
+INSERT INTO `usuarios` (`id`, `login`, `senha`, `email`, `nivel`) VALUES
+(2, 'gabriel', '1234', '', 1),
+(3, 'admin', '1234', '', 2);
 
 --
 -- Índices para tabelas despejadas
@@ -175,7 +178,7 @@ ALTER TABLE `produtos`
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restrições para despejos de tabelas

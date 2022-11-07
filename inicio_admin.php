@@ -11,7 +11,7 @@
 
   	<div>
   		<?php
-  		require_once("nav.php");
+      require_once("nav.php");
   		require_once("conecta.php");
     	?>
     </div>
@@ -65,8 +65,8 @@
                         <p>
                           $registro[descricao]
                         </p>
-                      </div>
-                      <button type='button'>Adicionar ao Carrinho</button>
+                      </div> 
+                      <button><a href='editar_produto.php?id_produto=$registro[id]'>Editar</a></button>
                     </div>
                 ");
               }

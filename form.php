@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Formulário PHP com anexo</title>
+    <title>Formulário</title>
     <link rel="stylesheet" href="css/estilo.css" />
  
     <!-- Layout -->
@@ -19,15 +19,16 @@
     <div>
     <?php
 
-      require_once("protege.php");
+      //require_once("protege.php");
       require_once("nav.php");
       require_once("conecta.php");
 
       // verificação de nivel de acesso do usuario
+      /*
       $nivel = $_SESSION["nivel"];
       if ($nivel == 1){
         header("location: nivel.php");
-      }
+      }*/
 
     ?>
     </div>
@@ -37,7 +38,7 @@
  <div class="container">
  <br>
    
- <form class="form-horizontal" method="POST">
+ <form class="form-horizontal" method="POST" enctype="multipart/form-data">
    <fieldset>
  
  <!-- Título do formulário -->
@@ -86,16 +87,14 @@
  </div> 
 -->
  <!-- Campo: Link da Mensagem -->
- <div class="form-group">
-   <label class="col-md-4 control-label" for="mensagem">Link da Imagem</label>
- <div class="col-md-4">                     
-   <textarea class="form-control" id="link_imagem" name="link_imagem"></textarea>
- </div>
  </div>
  
  <!-- Botão Enviar -->
  <center>
  <div class="form-group">
+  <label for="conteudo">Enviar imagem:</label>
+   <input type="file" name="pic" accept="image/*">
+   
    <label class="col-md-4 control-label" for="submit"></label>
  <div class="col-md-4">
    <button type="submit" name="enviar" class="btn btn-inverse">Enviar</button>
@@ -128,28 +127,32 @@ if (isset($_POST["enviar"]) == true) {
    echo("Preencha o <b>preco</b>");
  } else if (empty($_POST["descricao"])) {
    echo("Preencha a <b>descricao</b>");
- } else if(empty($_POST["link_imagem"])){
-   echo("Preencha o <b>link_imagem</b>");
  } else {    
    $nome = $_POST["nome"];
    $preco = $_POST["preco"];
    $descricao = $_POST["descricao"];
    $estoque = $_POST["estoque"];
-   $link_imagem = $_POST["link_imagem"];
+   //$link_imagem = $_POST["link_imagem"];
 
-   // INSERT INTO produtos (nome, preco, descricao, estoque) VALUES ('teste', '40', 'description', '40'); 
-   $sql = "INSERT INTO produtos (nome, preco, descricao, estoque, imagem) VALUES ('$nome', '$preco', '$descricao', '$estoque', '$link_imagem')";
+    if(isset($_FILES['pic'])){
+    $ext = strtolower(substr($_FILES['pic']['name'],-4)); //Pegando extensão do arquivo
+    $new_name = date("Y.m.d-H.i.s") . $ext; //Definindo um novo nome para o arquivo
+    $dir = './fotos/'; //Diretório para uploads
+ 
+    move_uploaded_file($_FILES['pic']['tmp_name'], $dir.$new_name); //Fazer upload do arquivo
+    echo '<div class="alert alert-success" role="alert" align="center">
+          <img src="./fotos/' . $new_name . '" class="img img-responsive img-thumbnail" width="200"> 
+          <br>
+          Imagem enviada com sucesso!
+          <br>
+          <a href="exemplo_upload_de_imagens.php">
+          <button class="btn btn-default">Enviar nova imagem</button>
+          </a></div>';
+        }
 
+   $sql = "INSERT INTO produtos (nome, preco, descricao, estoque, imagem) VALUES ('$nome', '$preco', '$descricao', '$estoque', '$new_name')";
 
-  // INSERT INTO produtos (nome, preco, descricao, estoque) VALUES ('teste', '50', 'teste', '50');
-// INSERT INTO imagens (id_produto, imagem) VALUES ((SELECT LAST_INSERT_ID()),'https://lh3.googleusercontent.com/p/AF1QipO74PEJkE4XiWni5xKHmzz6ub_hTwptFDbcG0Ec=s1280-p-no-v1');
-   
-   // echo para debugar a consulta sql gerada
-    echo ($sql);
-
-   // mandando executar a consulta sql
-   // a funcao mysqli_query retorna true se a consulta foi executada com sucesso
-   if (mysqli_query($conn, $sql)){
+  if (mysqli_query($conn, $sql)){
      echo ("Produto adicionado com sucesso!<br>");
    } else {
      // erro ao executar a consulta
@@ -158,9 +161,27 @@ if (isset($_POST["enviar"]) == true) {
 
    // encerrando a conexao
    mysqli_close($conn);
-   
  }
+
 }
+
+
+   // INSERT INTO produtos (nome, preco, descricao, estoque) VALUES ('teste', '40', 'description', '40'); 
+
+
+  // INSERT INTO produtos (nome, preco, descricao, estoque) VALUES ('teste', '50', 'teste', '50');
+// INSERT INTO imagens (id_produto, imagem) VALUES ((SELECT LAST_INSERT_ID()),'https://lh3.googleusercontent.com/p/AF1QipO74PEJkE4XiWni5xKHmzz6ub_hTwptFDbcG0Ec=s1280-p-no-v1');
+   
+   // echo para debugar a consulta sql gerada
+    //echo ($sql);
+
+
+   // mandando executar a consulta sql
+   // a funcao mysqli_query retorna true se a consulta foi executada com sucesso
+
+  
+ 
+
 
 ?>
 </html>

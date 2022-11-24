@@ -8,14 +8,6 @@
   <link rel="stylesheet" href="css/nav.css" />
 </head>
 <body>
-  <?php
-    session_start();
-
-    if (!isset($_SESSION["usuario"])){
-      //header("location: login.php");
-  }
-    $nivel = $_SESSION["nivel"];
-  ?>
   <header>
     <nav>
       <a class="logo" href="inicio.php">Flesch Pedras</a>
@@ -25,11 +17,6 @@
         <div class="line3"></div>
       </div>
       <ul class="nav-list">
-        <?php
-        if ($nivel != 1){
-          echo("<li><a href='form.php'>Upload</a></li>");
-        }
-        ?>
         <li><a href="login.php">Login</a></li>
         <li><a href="sair.php">Sair</a></li>
       </ul>

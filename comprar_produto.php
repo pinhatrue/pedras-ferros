@@ -3,9 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Editar produto</title>
+	<title>Finalizar compra</title>
 	<link rel="stylesheet" href="css/estilo.css" />
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -15,12 +14,12 @@
 	//require_once("protege.php");
 	require_once("nav.php");
 
+	/*
 	// verificação de nivel de acesso do usuario
-	
-	/*$nivel = $_SESSION["nivel"];
+	$nivel = $_SESSION["nivel"];
 	if ($nivel == 1){
 		header("location: nivel.php");
-	}*/
+	} */
 
 	?>
 
@@ -45,7 +44,6 @@
 				$nome 	= $produto["nome"];
 				$preco 	= $produto["preco"];
 				$descricao = $produto["descricao"];
-				$estoque = $produto["estoque"]; 
 				$imagem = $produto["imagem"]; // necessário para pré-selecionar o grupo de um produto
 
 			} else {
@@ -55,23 +53,23 @@
 			die("Falha na conexão " . mysqli_connect_error() );
 		}
 	?>
+
+	<?php echo " <figure class='figure'>
+  <img src='./fotos/$produto[imagem]' class='figure-img img-fluid rounded' alt='imagem' width='400' 
+  height='341'>
+  </figure> "?>
+  
 	<form method="POST" >
 		<fieldset>
 			<!-- para preencher os campos do formulário, é necessario printar os valores dentro do elemento VALUE -->
-			<legend>Editando produto de <b><?php echo ($nome); ?></b></legend>
-			Nome: <input type="text" name="nome" value="<?php echo ($nome); ?>"> <br>
-			preco: <input type="int" name="preco" value="<?php echo ($preco); ?>"> <br>
-			descricao: <input type="text" name="descricao" value="<?php echo($descricao); ?>"> <br>
-			estoque: <input type="int" name="estoque" value="<?php echo($estoque); ?>" > <br>
-		    imagem: <input type="int" name="imagem" value="<?php echo($imagem); ?>" > <br>
-			<input type="submit" name="enviar" value="Salvar">
+			<legend> <?php echo ($nome); ?></b></legend>
+			Valor: <?php echo ($preco); ?><br>
+			Informações do produto: <?php echo($descricao); ?><br>
+			
+			<input type="submit" name="enviar" value= "Finalizar compra">
 		</fieldset>
 	</form>
-	<?php echo " <figure class='figure'>
-  <img src='$imagem' class='figure-img img-fluid rounded' alt='imagem' width='400' 
-  height='341'>
-  <figcaption class='figure-caption'>A caption for the above image.</figcaption>
-  </figure> "?>
+
 	
 	<?php
 	// isset testa se uma variavel existe
@@ -87,8 +85,6 @@
 			echo("Preencha o  <b>preco</b>");
 		} else if (empty($_POST["descricao"])) {
 			echo("Preencha a <b>descricao</b>");
-		} else if(empty($_POST["estoque"])){
-			echo("Preencha o <b>estoque</b>");
 		} elseif (empty($_POST["imagem"])) {
 			echo "Preencha a <b>imagem</br>";
 		} else {
@@ -96,11 +92,10 @@
 			$nome = $_POST["nome"];
 			$preco = $_POST["preco"];
 			$descricao = $_POST["descricao"];
-			$estoque = $_POST["estoque"];
 			$imagem = $_POST["imagem"];	// campo que contém o id do grupo selecionado
 
 			// para editar o registro, usa-se o UPDATE
-			$sql = "UPDATE produtos SET nome = '$nome', preco = '$preco', descricao = '$descricao', estoque = '$estoque', imagem = '$imagem' WHERE id = $id_produto";
+			$sql = "UPDATE produtos SET nome = '$nome', preco = '$preco', descricao = '$descricao', imagem = '$imagem' WHERE id = $id_produto";
 
 			// echo para debugar a consulta sql gerada
 			// echo ($sql);
@@ -110,7 +105,7 @@
 			if (mysqli_query($conn, $sql)){
 				echo ("
 					<script>
-						alert('produto editado com sucesso');
+						alert('Compra finalizada!');
 						location.href = 'inicio.php';
 					</script>
 				");

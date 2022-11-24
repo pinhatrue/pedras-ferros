@@ -5,7 +5,7 @@
 </head>
 <body>
 	<?php 
-		session_start();
+		//session_start();
 		$nivel = $_SESSION["nivel"];
 		if ($nivel == 1){
 			echo "

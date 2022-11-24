@@ -498,3 +498,11 @@ footer .last {
     padding-left: 10%;
   }
 }
+
+/* WHATSAPP FIXO */
+.whatsapp-fixo {
+position: fixed;
+bottom:10px;
+left:10px;
+z-index: 999;
+}

@@ -38,6 +38,15 @@ if (isset($_POST['enviar']) == true) {
    $estoque = $_POST["estoque"];
    $link_imagem = $_POST["link_imagem"];
 
+ if(isset($_FILES['pic']))
+ {
+    $ext = strtolower(substr($_FILES['pic']['name'],-4)); //Pegando extensão do arquivo
+    $new_name = date("Y.m.d-H.i.s") . $ext; //Definindo um novo nome para o arquivo
+    $dir = './imagens/'; //Diretório para uploads 
+    move_uploaded_file($_FILES['pic']['tmp_name'], $dir.$new_name); //Fazer upload do arquivo
+    echo("Imagen enviada com sucesso!");
+ } 
+
    // INSERT INTO produtos (nome, preco, descricao, estoque) VALUES ('teste', '40', 'description', '40'); 
    $sql = "INSERT INTO produtos (nome, preco, descricao, estoque, imagem) VALUES ('$nome', '$preco', '$descricao', '$estoque', '$link_imagem')";
    // echo para debugar a consulta sql gerada

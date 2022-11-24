@@ -108,7 +108,7 @@
 
 				<div class="card-footer">
 					<input type="submit" value="Cadastrar" class="submit" name="enviar">
-					<a href="#" class="Cadastrar">Cadastra-se agora</a>
+					<a href="cadastro.php" class="Cadastrar">Cadastra-se agora</a>
 				</div>
 
 			</div>

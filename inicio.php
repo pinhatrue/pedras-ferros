@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Flesch Pedras</title>
     <link rel="stylesheet" href="css/styles.css" />
+
   </head>
   <body>
 
@@ -59,14 +60,14 @@
                 //echo ("<a scr='$registro[imagem]'");
                 echo ("  
                     <div class='card-item'>
-                      <img src='$registro[imagem]' alt='Imagem' />
+                      <img src='./fotos/$registro[imagem]' alt='$registro[nome]' />
                       <div class='card-content'>
                         <h3>$registro[nome]</h3>
                         <p>
                           $registro[descricao]
                         </p>
                       </div>
-                      <button type='button'>Adicionar ao Carrinho</button>
+                      <button><a href='comprar_produto.php?id_produto=$registro[id]'>Comprar</a></button>
                     </div>
                 ");
               }
@@ -83,29 +84,15 @@
             }
         ?>
       </div>
-    </section>
-    <section class="about" id="about">
-      <div class="content">
-        <div class="title-wrapper-about">
-          <p>Quem Somos</p>
-          <h3>Sobre</h3>
+      <script>
+        <button onclick="window.location.href = 'http://pt.stackoverflow.com'">link</button>
+        </script>
+              <div class="whatsapp-fixo">
+          <a href="https://api.whatsapp.com/send?phone=555135476048">
+            <img src="./images/" width="LARGURA" height="ALTURA" alt="Fale Conosco pelo WhatsApp"/> 
+          </a>
         </div>
-        <div class="about-content">
-          <div class="left">
-            <img src="https://lh3.googleusercontent.com/p/AF1QipMQ0xBT3usP17nj4WmbfxGrD93CWuQutPqRe_Gp=w960-h960-n-o-v1" alt="About" />
-          </div>
-          <div class="right">
-            <h3>PEDRA FERRO</h3>
-            <p>
-              Pedra ferro ferrugem e basalto preto
-            </p>
-          </div>
-        </div>
-      </div>
-      
-          </div>
     </section>
-
     <footer>
       <div class="main">
         <div class="content footer-links">
